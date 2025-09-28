@@ -22,7 +22,7 @@ class SplashPage extends StatelessWidget {
             fontFamily: 'Merriweather',
             fontSize: 40,
             fontWeight: FontWeight.w700,
-            color: AppColors.whiteText,
+            color: AppColors.whiteColor,
           ),
         ),
       ),
