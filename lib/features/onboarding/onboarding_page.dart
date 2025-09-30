@@ -1,8 +1,6 @@
-//import 'dart:developer';
-
+//import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
-//import 'package:material_color_utilities/material_color_utilities.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -11,6 +9,8 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+
         children: [
           Expanded(
             flex: 2,
@@ -20,14 +20,16 @@ class OnboardingPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20),
-          Text(
-            'Spend Smarter\n Salve More',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.purpleText,
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Inter',
+          FittedBox(
+            child: Text(
+              'Spend Smarter\n Save More',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.purpleText,
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Inter',
+              ),
             ),
           ),
 
@@ -52,15 +54,7 @@ class OnboardingPage extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   height: 56.0,
-                  width: 350.0,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: AppColors.gradientPurple2,
-                    ),
-                  ),
+                  width: MediaQuery.of(context).size.width * 0.9,
                   child: Text(
                     'Get Started',
                     textAlign: TextAlign.center,
@@ -76,16 +70,34 @@ class OnboardingPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16),
-          Text(
-            'Already have an account? Sign In',
-            style: TextStyle(
-              color: AppColors.greyText,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Inter',
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Already have an account?',
+                style: TextStyle(
+                  color: AppColors.greyText,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Inter',
+                ),
+              ),
+
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(
+                    color: AppColors.purpleText,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Inter',
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 60),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.07),
         ],
       ),
     );
