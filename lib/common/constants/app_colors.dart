@@ -16,4 +16,6 @@ class AppColors {
   static const whiteColorTwo = Color(0xffEEF8F7);
   static const purpleText = Color.fromARGB(255, 117, 56, 155);
   static const greyText = Color(0xFF444444);
+  static const darkgreyText = Color(0xFF666666);
+  static const redColor = Color(0xFFD44040);
 }
