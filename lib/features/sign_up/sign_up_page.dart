@@ -1,3 +1,4 @@
+import 'package:financy_app/features/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
 
@@ -47,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 60),
+              SizedBox(height: 70),
               Center(
                 child: Text(
                   'Start Saving\nYour Money',
@@ -180,6 +181,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         obscureText: _obscurePassword,
                         controller: _passwordController,
                         maxLength: 8,
+
                         style: TextStyle(
                           color: AppColors.purpleText,
                           fontSize: 16,
@@ -241,6 +243,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           if (value.length < 6) {
                             return 'Password must be at least 6 characters long';
                           }
+
                           // Verifica se contém pelo menos uma letra
                           if (!RegExp(r'[A-Za-z]').hasMatch(value)) {
                             return "Senha deve conter pelo menos uma letra";
@@ -256,8 +259,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       SizedBox(height: 16),
                       TextFormField(
                         controller: _confirmPasswordController,
-                        maxLength: 8,
+
                         obscureText: _obscureConfirmPassword,
+                        maxLength: 8,
                         style: TextStyle(
                           color: AppColors.purpleText,
                           fontSize: 16,
@@ -369,7 +373,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already have an account?',
+                    'Already Have Account?',
                     style: TextStyle(
                       color: AppColors.greyText,
                       fontSize: 14,
@@ -379,7 +383,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
 
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignInPage()),
+                      );
+                    },
                     child: Text(
                       'Log In',
                       style: TextStyle(

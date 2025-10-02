@@ -1,4 +1,6 @@
 //import 'package:flutter/gestures.dart';
+import 'package:financy_app/features/sign_in/sign_in_page.dart';
+import 'package:financy_app/features/sign_up/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
 
@@ -49,7 +51,12 @@ class OnboardingPage extends StatelessWidget {
               ),
               child: InkWell(
                 borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpPage()),
+                  );
+                },
                 // Handle button tap},
                 child: Container(
                   alignment: Alignment.center,
@@ -84,7 +91,12 @@ class OnboardingPage extends StatelessWidget {
               ),
 
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInPage()),
+                  );
+                },
                 child: Text(
                   'Sign In',
                   style: TextStyle(
