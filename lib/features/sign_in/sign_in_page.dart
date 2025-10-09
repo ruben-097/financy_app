@@ -1,4 +1,5 @@
 import 'package:financy_app/features/sign_up/sign_up_page.dart';
+import 'package:financy_app/service/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
 
@@ -219,7 +220,45 @@ class _SignInPageState extends State<SignInPage> {
                             borderRadius: BorderRadius.all(
                               Radius.circular(16.0),
                             ),
-                            onTap: () {
+                            onTap: () async {
+                              if (_formKey.currentState!.validate()) {
+                                try {
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) => Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                  final user = await FirebaseAuthService()
+                                      .signInWithEmail(
+                                        email: _emailController.text.trim(),
+                                        password: _passwordController.text
+                                            .trim(),
+                                      );
+                                  Navigator.pop(context);
+                                  if (user != null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Sign-in successful!'),
+                                      ),
+                                    );
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SignUpPage(),
+                                      ),
+                                    );
+                                  }
+                                  // Handle sign-in failure
+                                } catch (e) {
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(e.toString())),
+                                  );
+                                }
+                                //tr Process data.
+                              }
                               // Handle sign-in logic
                             },
                             child: Container(

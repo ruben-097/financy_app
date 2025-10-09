@@ -1,6 +1,7 @@
 import 'package:financy_app/features/sign_in/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
+import 'package:financy_app/service/firebase_auth_service.dart';
 
 //class SignUpPage extends StatelessWidget {
 //const SignUpPage({super.key});
@@ -21,6 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
+  final FirebaseAuthService authService = FirebaseAuthService();
 
   @override
   void dispose() {
@@ -351,7 +353,40 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                    onTap: () {},
+                    onTap: () async {
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) =>
+                                Center(child: CircularProgressIndicator()),
+                          );
+                          final user = await authService.signUpWithEmail(
+                            email: _emailController.text.trim(),
+                            password: _passwordController.text.trim(),
+                          );
+                          Navigator.pop(context); // Close the loading dialog
+                          if (user != null) {
+                            // Navigate to another page or show success message
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Sign up successful!')),
+                            );
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignInPage(),
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          Navigator.pop(context); // Close the loading dialog
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text(e.toString())));
+                        }
+                      }
+                    },
                     // Handle button tap},
                     child: Container(
                       alignment: Alignment.center,
