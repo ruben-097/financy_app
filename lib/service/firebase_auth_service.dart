@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:test_api/hooks_testing.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -19,10 +18,8 @@ class FirebaseAuthService {
 
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      // Handle specific Firebase authentication errors
-      throw Exception('Failed to sign up: ${e.message}');
+      rethrow; // relança para ser tratado no SignUpPage
     } catch (e) {
-      // Handle other errors
       throw Exception('An unknown error occurred: $e');
     }
   }
@@ -36,10 +33,8 @@ class FirebaseAuthService {
           .signInWithEmailAndPassword(email: email, password: password);
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      // Handle specific Firebase authentication errors
-      throw Exception('Failed to sign in: ${e.message}');
+      rethrow; // ✅ relança a exceção original
     } catch (e) {
-      // Handle other errors
       throw Exception('An unknown error occurred: $e');
     }
   }

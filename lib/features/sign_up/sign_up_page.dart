@@ -1,4 +1,5 @@
 import 'package:financy_app/features/sign_in/sign_in_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/service/firebase_auth_service.dart';
@@ -355,35 +356,53 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                     onTap: () async {
                       if (_formKey.currentState!.validate()) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (_) =>
+                              const Center(child: CircularProgressIndicator()),
+                        );
+
                         try {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (context) =>
-                                Center(child: CircularProgressIndicator()),
-                          );
-                          final user = await authService.signUpWithEmail(
-                            email: _emailController.text.trim(),
-                            password: _passwordController.text.trim(),
-                          );
-                          Navigator.pop(context); // Close the loading dialog
+                          final user = await FirebaseAuthService()
+                              .signUpWithEmail(
+                                name: _nameController.text.trim(),
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim(),
+                              );
+
                           if (user != null) {
-                            // Navigate to another page or show success message
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Sign up successful!')),
-                            );
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignInPage(),
+                                builder: (_) => const SignInPage(),
                               ),
                             );
                           }
-                        } catch (e) {
-                          Navigator.pop(context); // Close the loading dialog
+                        } on FirebaseAuthException catch (e) {
+                          String message;
+                          switch (e.code) {
+                            case 'email-already-in-use':
+                              message = 'Este email já está em uso.';
+                              break;
+                            case 'invalid-email':
+                              message = 'Email inválido.';
+                              break;
+                            case 'weak-password':
+                              message = 'Senha muito fraca.';
+                              break;
+                            default:
+                              message = e.message ?? 'Erro ao criar conta';
+                          }
                           ScaffoldMessenger.of(
                             context,
-                          ).showSnackBar(SnackBar(content: Text(e.toString())));
+                          ).showSnackBar(SnackBar(content: Text(message)));
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Erro inesperado: $e')),
+                          );
+                        } finally {
+                          Navigator.pop(context); // fecha loader
                         }
                       }
                     },
