@@ -52,14 +52,14 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => debugPrint('FAB pressionado!'),
-        backgroundColor: AppColors.purpleText,
+        backgroundColor: AppColors.purpleButton,
 
         child: const Icon(Icons.add, color: Colors.white),
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-        color: AppColors.whiteColor,
+        color: const Color.fromARGB(255, 248, 245, 245),
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         child: Row(
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(
                 Icons.home,
                 color: _currentIndex == 0
-                    ? Colors.purple
+                    ? AppColors.purpleButton
                     : const Color.fromARGB(255, 66, 64, 64),
               ),
               onPressed: () => _onItemTapped(0),
@@ -78,26 +78,26 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(
                 Icons.bar_chart,
                 color: _currentIndex == 1
-                    ? Colors.purple
-                    : const Color.fromARGB(255, 56, 54, 54),
+                    ? AppColors.purpleButton
+                    : Color.fromARGB(255, 56, 54, 54),
               ),
               onPressed: () => _onItemTapped(1),
             ),
             const SizedBox(width: 40), // espaço para FAB
             IconButton(
               icon: Icon(
-                Icons.person,
+                Icons.wallet,
                 color: _currentIndex == 2
-                    ? Colors.purple
+                    ? AppColors.purpleButton
                     : const Color.fromARGB(255, 41, 40, 40),
               ),
               onPressed: () => _onItemTapped(2),
             ),
             IconButton(
               icon: Icon(
-                Icons.settings,
+                Icons.person,
                 color: _currentIndex == 3
-                    ? Colors.purple
+                    ? AppColors.purpleButton
                     : const Color.fromARGB(255, 41, 40, 40),
               ),
               onPressed: () => _onItemTapped(3),

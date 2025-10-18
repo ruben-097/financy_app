@@ -1,3 +1,4 @@
+import 'package:financy_app/features/home/home_page.dart';
 import 'package:financy_app/features/onboarding/onboarding_page.dart';
 
 import 'package:financy_app/features/splash/splash_page.dart';
@@ -10,10 +11,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/splash',
+      initialRoute: '/home',
       routes: {
-        '/splash': (context) => const SplashPage(),
-        '/onboarding': (context) => const OnboardingPage(),
+        // '/splash': (context) => const SplashPage(),
+        // '/onboarding': (context) => const OnboardingPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
