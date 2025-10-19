@@ -20,5 +20,5 @@ class AppColors {
   static const redColor = Color(0xFFD44040);
   static const purpleButton = Color(0xFF5F168B);
   static const purpleButton2 = Color.fromARGB(255, 86, 24, 124);
-  static const greyText3 = Color(0xFFABA8AD);
+  static const greyText3 = Color.fromARGB(255, 218, 212, 221);
 }

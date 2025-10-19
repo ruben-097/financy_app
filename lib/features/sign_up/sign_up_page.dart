@@ -364,22 +364,27 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
 
                         try {
-                          final user = await FirebaseAuthService()
-                              .signUpWithEmail(
-                                name: _nameController.text.trim(),
-                                email: _emailController.text.trim(),
-                                password: _passwordController.text.trim(),
-                              );
+                          final user = await authService.signUpWithEmail(
+                            name: _nameController.text.trim(),
+                            email: _emailController.text.trim(),
+                            password: _passwordController.text.trim(),
+                          );
+
+                          if (mounted) Navigator.pop(context); // fecha loader
 
                           if (user != null) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const SignInPage(),
-                              ),
-                            );
+                            // Navega para SignInPage
+                            if (mounted) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) => SignInPage(),
+                                ),
+                                (route) => false,
+                              );
+                            }
                           }
                         } on FirebaseAuthException catch (e) {
+                          if (mounted) Navigator.pop(context);
                           String message;
                           switch (e.code) {
                             case 'email-already-in-use':
@@ -394,18 +399,22 @@ class _SignUpPageState extends State<SignUpPage> {
                             default:
                               message = e.message ?? 'Erro ao criar conta';
                           }
-                          ScaffoldMessenger.of(
-                            context,
-                          ).showSnackBar(SnackBar(content: Text(message)));
+                          if (mounted) {
+                            ScaffoldMessenger.of(
+                              context,
+                            ).showSnackBar(SnackBar(content: Text(message)));
+                          }
                         } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Erro inesperado: $e')),
-                          );
-                        } finally {
-                          Navigator.pop(context); // fecha loader
+                          if (mounted) Navigator.pop(context);
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Erro inesperado: $e')),
+                            );
+                          }
                         }
                       }
                     },
+
                     // Handle button tap},
                     child: Container(
                       alignment: Alignment.center,

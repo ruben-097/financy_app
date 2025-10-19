@@ -3,22 +3,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  User? get currentUser => _firebaseAuth.currentUser;
+  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+
   Future<User?> signUpWithEmail({
+    required String name,
     required String email,
     required String password,
-    String? name,
   }) async {
     try {
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      if (name != null && name.isNotEmpty) {
-        await userCredential.user?.updateDisplayName(name);
-      }
+      // Atualiza o displayName e recarrega o usuário
+      await userCredential.user?.updateDisplayName(name);
+      await userCredential.user?.reload();
 
-      return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      rethrow; // relança para ser tratado no SignUpPage
+      // Retorna o usuário ATUALIZADO
+      return _firebaseAuth.currentUser;
+    } on FirebaseAuthException {
+      rethrow;
     } catch (e) {
       throw Exception('An unknown error occurred: $e');
     }
@@ -31,11 +35,12 @@ class FirebaseAuthService {
     try {
       UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
-      return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      rethrow; // ✅ relança a exceção original
-    } catch (e) {
-      throw Exception('An unknown error occurred: $e');
+
+      // Recarrega os dados do usuário para garantir que vem o displayName
+      await userCredential.user?.reload();
+      return _firebaseAuth.currentUser;
+    } on FirebaseAuthException {
+      rethrow;
     }
   }
 
