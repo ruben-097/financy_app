@@ -109,9 +109,9 @@ class ProfilePage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
-                children: const [
-                  SizedBox(height: 6),
-                  Text(
+                children: [
+                  const SizedBox(height: 6),
+                  const Text(
                     'Ruben Miguel Maimona',
                     style: TextStyle(
                       color: Colors.black,
@@ -120,8 +120,8 @@ class ProfilePage extends StatelessWidget {
                       fontFamily: 'Inter',
                     ),
                   ),
-                  SizedBox(height: 6),
-                  Text(
+                  const SizedBox(height: 6),
+                  const Text(
                     'rubenmaimona@gmail.com',
                     style: TextStyle(
                       color: AppColors.purpleButton,
@@ -130,31 +130,75 @@ class ProfilePage extends StatelessWidget {
                       fontFamily: 'Inter',
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
 
-          /* Row(
-            children: const [
-              Icon(Icons.person_2, color: Colors.black, size: 20),
-              SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Change Name',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Inter',
+                  const SizedBox(height: 55),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17), // CHANGE NAME
+                    child: InkWell(
+                      onTap: () {},
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.edit, color: Colors.black),
+                          SizedBox(width: 10),
+                          Text(
+                            "Change name",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.lock, color: Colors.black),
+                          SizedBox(width: 10),
+                          Text(
+                            "Change password",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  // LOG OUT
+                  Padding(
+                    padding: const EdgeInsets.only(left: 17),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.left,
+                        children: const [
+                          Icon(Icons.exit_to_app, color: Colors.red),
+                          SizedBox(width: 10),
+                          Text(
+                            "Log out",
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
-            ],
-          ),*/
+            ),
+          ),
         ],
       ),
     );
