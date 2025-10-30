@@ -1,6 +1,6 @@
+import 'package:financy_app/service/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -32,15 +32,14 @@ class ProfilePage extends StatelessWidget {
                 Align(
                   alignment: Alignment.topCenter,
                   child: Padding(
-                    padding: EdgeInsetsGeometry.only(top: 80),
-                    child: Text(
+                    padding: EdgeInsets.only(top: 80),
+                    child: const Text(
                       'Profile',
-
                       style: TextStyle(
                         color: AppColors.whiteColor,
                         fontSize: 17,
                         fontWeight: FontWeight.bold,
-                        fontFamily: 'Inter',
+                        fontFamily: 'Merriweather',
                       ),
                     ),
                   ),
@@ -50,16 +49,14 @@ class ProfilePage extends StatelessWidget {
                 Positioned(
                   right: 0,
                   top: 77,
-
                   child: Container(
                     height: 28,
                     width: 28,
-
                     decoration: BoxDecoration(
                       color: Colors.white24,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.notifications,
                       color: AppColors.whiteColor,
                       size: 20,
@@ -70,6 +67,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
+          // Avatar
           Positioned(
             top: topContainerHeight - avatarRadius,
             left: 0,
@@ -93,7 +91,6 @@ class ProfilePage extends StatelessWidget {
                 child: ClipOval(
                   child: Image.asset(
                     'assets/images/log.png',
-
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -101,7 +98,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
-          // Nome e e-mail
+          // Nome, email e ações
           Positioned(
             top: topContainerHeight + avatarRadius + 16,
             left: 0,
@@ -133,73 +130,61 @@ class ProfilePage extends StatelessWidget {
 
                   const SizedBox(height: 55),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 17), // CHANGE NAME
-                    child: InkWell(
-                      onTap: () {},
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.edit, color: Colors.black),
-                          SizedBox(width: 10),
-                          Text(
-                            "Change name",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Change name
+                  _buildActionRow(Icons.edit, "Change name", () {}),
 
                   const SizedBox(height: 15),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 17),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.lock, color: Colors.black),
-                          SizedBox(width: 10),
-                          Text(
-                            "Change password",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Change password
+                  _buildActionRow(Icons.lock, "Change password", () {}),
 
                   const SizedBox(height: 15),
 
                   // LOG OUT
-                  Padding(
-                    padding: const EdgeInsets.only(left: 17),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.left,
-                        children: const [
-                          Icon(Icons.exit_to_app, color: Colors.red),
-                          SizedBox(width: 10),
-                          Text(
-                            "Log out",
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  _buildActionRow(
+                    Icons.exit_to_app,
+                    "Log out",
+                    () {
+                      FirebaseAuthService().signOut(
+                        onSuccess: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/sign_in', // nome da rota da tela de login
+                            (route) => false,
+                          );
+                        },
+                      );
+                    },
+                    iconColor: Colors.red,
+                    textColor: Colors.red,
                   ),
                 ],
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildActionRow(
+    IconData icon,
+    String text,
+    VoidCallback onTap, {
+    Color iconColor = Colors.black,
+    Color textColor = Colors.black,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 17),
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Icon(icon, color: iconColor),
+            const SizedBox(width: 10),
+            Text(text, style: TextStyle(color: textColor, fontSize: 16)),
+          ],
+        ),
       ),
     );
   }

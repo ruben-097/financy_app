@@ -1,21 +1,9 @@
+import 'package:financy_app/features/others/transaction_list.dart';
 import 'package:flutter/material.dart';
 import 'package:financy_app/common/constants/app_colors.dart';
 import 'package:financy_app/service/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-class Transaction {
-  final String title;
-  final double amount;
-  final bool isIncome;
-  final DateTime date;
-
-  Transaction({
-    required this.title,
-    required this.amount,
-    required this.isIncome,
-    required this.date,
-  });
-}
+import '../others/transaction.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -27,57 +15,6 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   final authService = FirebaseAuthService();
   String userName = 'Usuário';
-
-  final List<Transaction> transactions = [
-    Transaction(
-      title: "Netflix",
-      amount: 1500,
-      isIncome: true,
-      date: DateTime.now().subtract(const Duration(days: 1)),
-    ),
-    Transaction(
-      title: "BFA",
-      amount: 200,
-      isIncome: false,
-      date: DateTime.now().subtract(const Duration(days: 2)),
-    ),
-    Transaction(
-      title: "GloboPlay",
-      amount: 500,
-      isIncome: true,
-      date: DateTime.now().subtract(const Duration(days: 3)),
-    ),
-    Transaction(
-      title: "Crunchyroll",
-      amount: 100,
-      isIncome: false,
-      date: DateTime.now().subtract(const Duration(days: 4)),
-    ),
-    Transaction(
-      title: "Pionner",
-      amount: 673,
-      isIncome: true,
-      date: DateTime.now().subtract(const Duration(days: 5)),
-    ),
-    Transaction(
-      title: "BAI",
-      amount: 150,
-      isIncome: false,
-      date: DateTime.now().subtract(const Duration(days: 7)),
-    ),
-    Transaction(
-      title: "Redbull",
-      amount: 52,
-      isIncome: false,
-      date: DateTime.now().subtract(const Duration(days: 2)),
-    ),
-    Transaction(
-      title: "AMDRyzen",
-      amount: 78,
-      isIncome: true,
-      date: DateTime.now().subtract(const Duration(days: 3)),
-    ),
-  ];
 
   @override
   void initState() {
@@ -141,8 +78,8 @@ class _HomeTabState extends State<HomeTab> {
                       ),
                       const Spacer(),
                       Container(
-                        height: 45,
-                        width: 45,
+                        height: 40,
+                        width: 40,
                         decoration: BoxDecoration(
                           color: Colors.white24,
                           borderRadius: BorderRadius.circular(10),
