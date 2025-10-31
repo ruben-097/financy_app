@@ -39,3 +39,41 @@ dependencies:
   flutter_lints: ^5.0.0
   characters: ^1.4.0
   material_color_utilities: ^0.11.1
+
+
+
+⚙️ Como rodar o projeto
+
+Clone o repositório:
+
+git clone <URL_DO_SEU_REPOSITORIO>
+
+
+Entre na pasta do projeto:
+
+cd financy_app
+
+
+Instale as dependências:
+
+flutter pub get
+
+
+Configure o Firebase (crie um projeto no Firebase
+) e adicione os arquivos de configuração correspondentes (google-services.json para Android e GoogleService-Info.plist para iOS).
+
+Execute o app:
+
+flutter run
+
+📝 Observações
+
+Todas as transações são fictícias e o app serve apenas para estudo e prática de Flutter e Firebase.
+
+Projeto recomendado para quem está começando a aprender Flutter.
+
+O app ainda está em desenvolvimento e melhorias na UI, microanimações e funcionalidades serão implementadas futuramente.
+
+📚 Licença
+
+Projeto criado para fins educativos. Sinta-se à vontade para estudar e contribuir, mas não há garantia de uso comercial.
