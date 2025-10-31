@@ -2,7 +2,7 @@
 
 **Status:** 🚧 Em desenvolvimento  
 
-O **Financy App** é um projeto pessoal desenvolvido em **Flutter**, com o objetivo de **simular o funcionamento de uma carteira digital** — apresentando ganhos e perdas de ações de forma visual e interativa.  
+O **Financy App** é um projeto pessoal desenvolvido em **Flutter**, com o objectivo de por em pratica os meus conhecimentos e **simular o funcionamento de uma carteira digital** — apresentando ganhos e perdas de ações de forma visual e interativa.  
 Toda a simulação ocorre no **front-end**, enquanto o **Firebase Authentication** é utilizado para **login, cadastro e exibição do nome do usuário logado**.
 
 ## 🚀 Tecnologias utilizadas
@@ -18,8 +18,8 @@ Toda a simulação ocorre no **front-end**, enquanto o **Firebase Authentication
 - [x] Tela de **login e cadastro** integrada ao Firebase  
 - [x] Exibição do **nome do usuário logado (displayName)**  
 - [x] Interface de **simulação de ganhos e perdas** no front-end  
-- [ ] Dashboard com **dados e gráficos simulados**  
-- [ ] Perfil de usuário com informações personalizadas  
+- [x] Página Statistics com balanço baseado em transações fictícias (não dinâmica)
+- [x] Página Profile com informações básicas do usuário (nome, email e avatar) 
 - [ ] Melhorias de UI e microanimações  
 
 ---
