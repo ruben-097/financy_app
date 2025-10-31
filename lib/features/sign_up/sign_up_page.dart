@@ -198,7 +198,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
-                          hintText: '❔❔❔❔❔❔❔',
+                          hintText: '********',
                           hintStyle: TextStyle(fontSize: 10),
                           helperStyle: TextStyle(
                             fontSize: 10,
@@ -282,8 +282,11 @@ class _SignUpPageState extends State<SignUpPage> {
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
-                          hintText: '❔❔❔❔❔❔❔',
-                          hintStyle: TextStyle(fontSize: 10),
+                          hintText: '*******',
+                          hintStyle: TextStyle(
+                            fontSize: 12,
+                            color: AppColors.greyText,
+                          ),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _obscureConfirmPassword

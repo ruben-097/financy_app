@@ -132,7 +132,11 @@ class _SignInPageState extends State<SignInPage> {
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
-                        hintText: 'name@email.com',
+                        hintText: 'usuario@email.com',
+                        hintStyle: TextStyle(
+                          color: AppColors.greyText,
+                          fontSize: 12,
+                        ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -184,7 +188,11 @@ class _SignInPageState extends State<SignInPage> {
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
-                        hintText: '❔❔❔❔❔❔❔',
+                        hintText: '*******',
+                        hintStyle: TextStyle(
+                          color: AppColors.greyText,
+                          fontSize: 12,
+                        ),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscurePassword

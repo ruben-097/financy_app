@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -42,12 +43,17 @@ class FirebaseAuthService {
     }
   }
 
-  Future<void> signOut({required Null Function() onSuccess}) async {
+  Future<void> signOut({
+    required Function() onSuccess,
+    required Function(dynamic error) onError,
+  }) async {
     try {
       await _firebaseAuth.signOut();
+      debugPrint('✅ Usuário deslogado com sucesso');
+      onSuccess(); // chama callback de sucesso
     } catch (e) {
-      debugPrint("Erro ao deslogar: $e");
-      rethrow;
+      debugPrint('❌ Erro ao deslogar: $e');
+      onError(e); // chama callback de erro
     }
   }
 }
