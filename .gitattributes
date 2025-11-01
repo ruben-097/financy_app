@@ -1,0 +1,14 @@
+# Forçar o GitHub a reconhecer o Dart corretamente
+*.dart linguist-detectable=true
+*.dart linguist-language=Dart
+
+# Ignorar arquivos que não são código-fonte
+*.json linguist-detectable=false
+*.png linguist-detectable=false
+*.jpg linguist-detectable=false
+*.jpeg linguist-detectable=false
+*.svg linguist-detectable=false
+*.webp linguist-detectable=false
+*.lock linguist-detectable=false
+*.yaml linguist-detectable=true
+*.yml linguist-detectable=true
